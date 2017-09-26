@@ -1,0 +1,23 @@
+// body {
+//   background-color: red;
+// }
+
+#mainDiv {
+  background-image: url("/assets/bg.jpg");
+  background-size: cover;
+  padding-bottom: 1px;
+  padding-top: 1px;
+
+}
+
+.postDiv {
+  background-color: white;
+  margin: 30px;
+  // padding-top: 20px;
+  padding: 20px;
+}
+
+.pictureElem {
+  height: 200px;
+  width: 400px;
+}

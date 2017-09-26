@@ -2,13 +2,17 @@ console.log("hello world");
 
 let body = document.getElementById("body");
 
-let mainDiv = document.createElement("div");
-mainDiv.id = "mainDiv";
-body.appendChild(mainDiv);
+let appTitle = document.createElement("h1");
+appTitle.id = "appTitle";
+body.appendChild(appTitle);
+
+let plusDiv = document.createElement("div");
+plusDiv.id = "plusDiv";
+body.appendChild(plusDiv);
 
 let menuDiv = document.createElement("div");
 menuDiv.id = "menuDiv";
-mainDiv.appendChild(menuDiv);
+body.appendChild(menuDiv);
 
   let randomDiv = document.createElement("div");
   randomDiv.id = "randomDiv";
@@ -25,15 +29,21 @@ mainDiv.appendChild(menuDiv);
   getAppDiv.innerHTML = "GET APP";
   menuDiv.appendChild(getAppDiv);
 
+let mainDiv = document.createElement("div");
+mainDiv.id = "mainDiv";
+body.appendChild(mainDiv);
+
 let headerDiv = document.createElement("div");
 headerDiv.id = "headerDiv";
 mainDiv.appendChild(headerDiv);
 
 
+
+
 let redditReq = new XMLHttpRequest();
 redditReq.addEventListener("load", function(){
   let data = JSON.parse(this.responseText);
-  postBuilder(mainDiv, 4, data);
+  postBuilder(mainDiv, 10, data);
 });
 redditReq.open("GET", "https://www.reddit.com/r/outrun.json");
 redditReq.send();
@@ -46,9 +56,9 @@ function postBuilder(parentElem, amount, data){
     postDiv.className = "postDiv";
     parentElem.appendChild(postDiv);
 
-    let pictureElem = document.createElement("img");
+    let pictureElem = document.createElement("div");
     pictureElem.className = "pictureElem";
-    pictureElem.src = postData[i].data.url;
+    pictureElem.style.backgroundImage = `url('${postData[i].data.url}')`;
     postDiv.appendChild(pictureElem);
 
     let titleDiv = document.createElement("div");
