@@ -1,18 +1,19 @@
 console.log("hello world");
 
+let header = document.getElementById("header");
 let body = document.getElementById("body");
 
 let appTitle = document.createElement("h1");
 appTitle.id = "appTitle";
-body.appendChild(appTitle);
+header.appendChild(appTitle);
 
 let plusDiv = document.createElement("div");
 plusDiv.id = "plusDiv";
-body.appendChild(plusDiv);
+header.appendChild(plusDiv);
 
 let menuDiv = document.createElement("div");
 menuDiv.id = "menuDiv";
-body.appendChild(menuDiv);
+header.appendChild(menuDiv);
 
   let randomButton = document.createElement("button");
   randomButton.id = "randomButton";
@@ -27,6 +28,7 @@ body.appendChild(menuDiv);
     boardReq.open("GET", "https://www.reddit.com/r/VaporwaveAesthetics.json");
     boardReq.send();
     boardReq.addEventListener("load", function(){
+      mainDiv.innerHTML = "";
       let data = JSON.parse(this.responseText);
       postBuilder(mainDiv, 10, data);
     })
@@ -39,7 +41,7 @@ body.appendChild(menuDiv);
   menuDiv.appendChild(getAppButton);
 
 let mainDiv = document.createElement("div");
-mainDiv.id = "mainDiv";
+mainDiv.className = "mainDiv";
 body.appendChild(mainDiv);
 
 let headerDiv = document.createElement("div");
@@ -59,7 +61,9 @@ redditReq.send();
 function postBuilder(parentElem, amount, data){
   console.log(data.data.children[12].data);
   let postData = data.data.children;
-  for(let i = 2; i < (amount+2); i++){
+
+
+  for(let i = 0; i < amount; i++){
     let postDiv = document.createElement("div");
     postDiv.className = "postDiv";
     parentElem.appendChild(postDiv);

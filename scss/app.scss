@@ -1,8 +1,10 @@
-// body {
-//   background-color: red;
-// }
+#appTitle {
+  background: white url("/assets/logo.svg") no-repeat center;
+  // background-image: url("/assets/header_bg.svg");
+  height: 40px;
+}
 
-#mainDiv {
+.mainDiv {
   background-image: url("/assets/bg.jpg");
   background-size: cover;
   padding-bottom: 1px;
@@ -10,14 +12,69 @@
 
 }
 
+#menuDiv {
+  background-color: #3A3A3C;
+  text-align: center;
+  height: 50px;
+}
+
+#randomButton {
+  background-color: #3A3A3C;
+  border: none;
+  color: #818285;
+  font-size: 20px;
+}
+
+#boardsButton {
+  background-color: #3A3A3C;
+  border: none;
+  color: #818285;
+  font-size: 20px;
+}
+
+#getAppButton {
+  background-color: #3A3A3C;
+  border: none;
+  color: #818285;
+  font-size: 20px;
+}
+
 .postDiv {
   background-color: white;
   margin: 30px;
   // padding-top: 20px;
   padding: 20px;
+  width: 50%;
+  display: inline-block;
 }
 
 .pictureElem {
-  height: 200px;
+  height: 300px;
   width: 400px;
+  background-size: cover;
+  background-position: center;
+  margin: auto;
+}
+
+.titleDiv {
+  width: 400px;
+  margin: auto;
+}
+
+.submitterDiv {
+  width: 400px;
+  margin: auto;
+  color: #8F9194;
+}
+
+.scoreDiv {
+  width: 400px;
+  margin: auto;
+  color: #8F9194;
+}
+
+.commentDiv {
+  width: 400px;
+  margin: auto;
+  color: #8F9194;
 }
