@@ -18,6 +18,16 @@ header.appendChild(menuDiv);
   let randomButton = document.createElement("button");
   randomButton.id = "randomButton";
   randomButton.innerHTML = "RANDOM";
+  randomButton.addEventListener("click", function(){
+    let randomReq = new XMLHttpRequest();
+    randomReq.open("GET", "https://www.reddit.com/r/glitch_art.json");
+    randomReq.send();
+    randomReq.addEventListener("load", function(){
+      mainDiv.innerHTML = "";
+      let data = JSON.parse(this.responseText);
+      postBuilder(mainDiv, 10, data);
+    })
+  })
   menuDiv.appendChild(randomButton);
 
   let boardsButton = document.createElement("button");
