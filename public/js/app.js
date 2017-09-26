@@ -14,20 +14,29 @@ let menuDiv = document.createElement("div");
 menuDiv.id = "menuDiv";
 body.appendChild(menuDiv);
 
-  let randomDiv = document.createElement("div");
-  randomDiv.id = "randomDiv";
-  randomDiv.innerHTML = "RANDOM";
-  menuDiv.appendChild(randomDiv);
+  let randomButton = document.createElement("button");
+  randomButton.id = "randomButton";
+  randomButton.innerHTML = "RANDOM";
+  menuDiv.appendChild(randomButton);
 
-  let boardsDiv = document.createElement("div");
-  boardsDiv.id = "boardsDiv";
-  boardsDiv.innerHTML = "MY BOARDS";
-  menuDiv.appendChild(boardsDiv);
+  let boardsButton = document.createElement("button");
+  boardsButton.id = "boardsButton";
+  boardsButton.innerHTML = "MY BOARDS";
+  boardsButton.addEventListener("click", function(){
+    let boardReq = new XMLHttpRequest();
+    boardReq.open("GET", "https://www.reddit.com/r/VaporwaveAesthetics.json");
+    boardReq.send();
+    boardReq.addEventListener("load", function(){
+      let data = JSON.parse(this.responseText);
+      postBuilder(mainDiv, 10, data);
+    })
+  })
+  menuDiv.appendChild(boardsButton);
 
-  let getAppDiv = document.createElement("div");
-  getAppDiv.id = "getAppDiv";
-  getAppDiv.innerHTML = "GET APP";
-  menuDiv.appendChild(getAppDiv);
+  let getAppButton = document.createElement("button");
+  getAppButton.id = "getAppButton";
+  getAppButton.innerHTML = "GET THE APP";
+  menuDiv.appendChild(getAppButton);
 
 let mainDiv = document.createElement("div");
 mainDiv.id = "mainDiv";
@@ -36,7 +45,6 @@ body.appendChild(mainDiv);
 let headerDiv = document.createElement("div");
 headerDiv.id = "headerDiv";
 mainDiv.appendChild(headerDiv);
-
 
 
 
@@ -49,7 +57,7 @@ redditReq.open("GET", "https://www.reddit.com/r/outrun.json");
 redditReq.send();
 
 function postBuilder(parentElem, amount, data){
-  console.log(data.data.children[2].data);
+  console.log(data.data.children[12].data);
   let postData = data.data.children;
   for(let i = 2; i < (amount+2); i++){
     let postDiv = document.createElement("div");
