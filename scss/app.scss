@@ -1,3 +1,7 @@
+@mixin block_display($block_display){
+  display: $block_display;
+}
+
 #appTitle {
   background: white url("/assets/logo.svg") no-repeat center;
   // background-image: url("/assets/header_bg.svg");
@@ -25,11 +29,19 @@
   font-size: 20px;
 }
 
+#randomButton:hover {
+    color: #F1592A;
+}
+
 #boardsButton {
   background-color: #3A3A3C;
   border: none;
   color: #818285;
   font-size: 20px;
+}
+
+#boardsButton:hover {
+  color: #F1592A;
 }
 
 #getAppButton {
@@ -39,13 +51,24 @@
   font-size: 20px;
 }
 
+#getAppButton:hover {
+  color: #F1592A;
+}
+
 .postDiv {
   background-color: white;
   margin: 30px;
-  // padding-top: 20px;
+  // margin: auto;
   padding: 20px;
-  width: 50%;
+  max-width: 400px;
+  max-height: 500px;
   display: inline-block;
+  border: 10px solid transparent;
+}
+
+.postDiv:hover {
+  border: 10px solid #F1592A;
+
 }
 
 .pictureElem {
@@ -77,4 +100,16 @@
   width: 400px;
   margin: auto;
   color: #8F9194;
+}
+
+@media screen and (min-width: 0px){
+  @include block_display(block);
+}
+
+@media screen and (min-width: 400px){
+  @include block_display(inline-block);
+}
+
+@media screen and (min-width: 800px){
+  @include block_display(inline-block);
 }

@@ -15,6 +15,20 @@ let menuDiv = document.createElement("div");
 menuDiv.id = "menuDiv";
 header.appendChild(menuDiv);
 
+
+function makeReq(element, url){
+  let element = new XMLHttpRequest();
+  element.open("GET", url);
+  element.send();
+  element.addEventListener("load", function(){
+    mainDiv.innerHTML = "";
+    let data = JSON.parse(this.responseText);
+    postBuilder(mainDiv, 10, data);
+  })
+}
+
+
+
   let randomButton = document.createElement("button");
   randomButton.id = "randomButton";
   randomButton.innerHTML = "RANDOM";
@@ -25,7 +39,7 @@ header.appendChild(menuDiv);
     randomReq.addEventListener("load", function(){
       mainDiv.innerHTML = "";
       let data = JSON.parse(this.responseText);
-      postBuilder(mainDiv, 10, data);
+      postBuilder(mainDiv, 12, data);
     })
   })
   menuDiv.appendChild(randomButton);
@@ -40,7 +54,7 @@ header.appendChild(menuDiv);
     boardReq.addEventListener("load", function(){
       mainDiv.innerHTML = "";
       let data = JSON.parse(this.responseText);
-      postBuilder(mainDiv, 10, data);
+      postBuilder(mainDiv, 12, data);
     })
   })
   menuDiv.appendChild(boardsButton);
@@ -48,6 +62,16 @@ header.appendChild(menuDiv);
   let getAppButton = document.createElement("button");
   getAppButton.id = "getAppButton";
   getAppButton.innerHTML = "GET THE APP";
+  getAppButton.addEventListener("click", function(){
+    let getAppReq = new XMLHttpRequest();
+    getAppReq.open("GET", "https://www.reddit.com/r/ImaginaryLandscapes.json");
+    getAppReq.send();
+    getAppReq.addEventListener("load", function(){
+      mainDiv.innerHTML = "";
+      let data = JSON.parse(this.responseText);
+      postBuilder(mainDiv, 12, data);
+    })
+  })
   menuDiv.appendChild(getAppButton);
 
 let mainDiv = document.createElement("div");
@@ -63,13 +87,13 @@ mainDiv.appendChild(headerDiv);
 let redditReq = new XMLHttpRequest();
 redditReq.addEventListener("load", function(){
   let data = JSON.parse(this.responseText);
-  postBuilder(mainDiv, 10, data);
+  postBuilder(mainDiv, 12, data);
 });
 redditReq.open("GET", "https://www.reddit.com/r/outrun.json");
 redditReq.send();
 
 function postBuilder(parentElem, amount, data){
-  console.log(data.data.children[12].data);
+  console.log(data.data.children[0].data);
   let postData = data.data.children;
 
 
@@ -85,12 +109,12 @@ function postBuilder(parentElem, amount, data){
 
     let titleDiv = document.createElement("div");
     titleDiv.className = "titleDiv";
-    titleDiv.innerHTML = postData[i].data.title;
+    titleDiv.innerHTML = (postData[i].data.title).substr(0, 50) + "...";
     postDiv.appendChild(titleDiv);
 
     let submitterDiv = document.createElement("div");
     submitterDiv.className = "submitterDiv";
-    submitterDiv.innerHTML = "by " + postData[i].data.author + " on " + (new Date(postData[i].data.created * 1000));
+    submitterDiv.innerHTML = "by " + postData[i].data.author + " on " + (new Date(postData[i].data.created * 1000)).toLocaleString();
     postDiv.appendChild(submitterDiv);
 
     let scoreDiv = document.createElement("div");
