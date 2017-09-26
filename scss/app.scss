@@ -2,6 +2,10 @@
   display: $block_display;
 }
 
+body {
+  margin: 0;
+}
+
 #appTitle {
   background: white url("/assets/logo.svg") no-repeat center;
   // background-image: url("/assets/header_bg.svg");
@@ -13,7 +17,6 @@
   background-size: cover;
   padding-bottom: 1px;
   padding-top: 1px;
-
 }
 
 #menuDiv {

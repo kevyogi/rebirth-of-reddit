@@ -66,8 +66,13 @@ function callBack(){
 }
 
 function postBuilder(parentElem, amount, data){
-  console.log(data.data.children[0].data);
+  // console.log(data.data.children[0].data);
+  // console.log(data.data.children[6].data);
   let postData = data.data.children;
+  // console.log(postData[6].data.preview.images[0].source.url);
+  console.log(postData[3].data);
+  console.log(postData[5].data);
+  console.log(postData[6].data);
 
   for(let i = 0; i < amount; i++){
     let postDiv = document.createElement("div");
@@ -76,7 +81,13 @@ function postBuilder(parentElem, amount, data){
 
     let pictureElem = document.createElement("div");
     pictureElem.className = "pictureElem";
-    pictureElem.style.backgroundImage = `url('${postData[i].data.url}')`;
+    if(postData[i].data.hasOwnProperty("preview") && postData[i].data.preview.images[0].variants.hasOwnProperty("gif")){
+      pictureElem.style.backgroundImage = `url('${postData[i].data.preview.images[0].variants.gif.source.url}')`;
+    }else if(postData[i].data.hasOwnProperty("preview")){
+      pictureElem.style.backgroundImage = `url('${postData[i].data.preview.images[0].source.url}')`;
+    }else{
+      pictureElem.style.backgroundImage = `url('${postData[i].data.url}')`;
+    }
     postDiv.appendChild(pictureElem);
 
     let titleDiv = document.createElement("div");
