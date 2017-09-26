@@ -2,6 +2,7 @@ console.log("hello world");
 
 let header = document.getElementById("header");
 let body = document.getElementById("body");
+let footer = document.getElementById("footer");
 
 let appTitle = document.createElement("h1");
 appTitle.id = "appTitle";
@@ -9,38 +10,18 @@ header.appendChild(appTitle);
 
 let plusDiv = document.createElement("div");
 plusDiv.id = "plusDiv";
+plusDiv.innerHTML = "+";
 header.appendChild(plusDiv);
 
 let menuDiv = document.createElement("div");
 menuDiv.id = "menuDiv";
 header.appendChild(menuDiv);
 
-
-function makeReq(element, url){
-  let element = new XMLHttpRequest();
-  element.open("GET", url);
-  element.send();
-  element.addEventListener("load", function(){
-    mainDiv.innerHTML = "";
-    let data = JSON.parse(this.responseText);
-    postBuilder(mainDiv, 10, data);
-  })
-}
-
-
-
   let randomButton = document.createElement("button");
   randomButton.id = "randomButton";
   randomButton.innerHTML = "RANDOM";
   randomButton.addEventListener("click", function(){
-    let randomReq = new XMLHttpRequest();
-    randomReq.open("GET", "https://www.reddit.com/r/glitch_art.json");
-    randomReq.send();
-    randomReq.addEventListener("load", function(){
-      mainDiv.innerHTML = "";
-      let data = JSON.parse(this.responseText);
-      postBuilder(mainDiv, 12, data);
-    })
+    makeReq("glitch_art");
   })
   menuDiv.appendChild(randomButton);
 
@@ -48,14 +29,7 @@ function makeReq(element, url){
   boardsButton.id = "boardsButton";
   boardsButton.innerHTML = "MY BOARDS";
   boardsButton.addEventListener("click", function(){
-    let boardReq = new XMLHttpRequest();
-    boardReq.open("GET", "https://www.reddit.com/r/VaporwaveAesthetics.json");
-    boardReq.send();
-    boardReq.addEventListener("load", function(){
-      mainDiv.innerHTML = "";
-      let data = JSON.parse(this.responseText);
-      postBuilder(mainDiv, 12, data);
-    })
+    makeReq("VaporwaveAesthetics");
   })
   menuDiv.appendChild(boardsButton);
 
@@ -63,14 +37,7 @@ function makeReq(element, url){
   getAppButton.id = "getAppButton";
   getAppButton.innerHTML = "GET THE APP";
   getAppButton.addEventListener("click", function(){
-    let getAppReq = new XMLHttpRequest();
-    getAppReq.open("GET", "https://www.reddit.com/r/ImaginaryLandscapes.json");
-    getAppReq.send();
-    getAppReq.addEventListener("load", function(){
-      mainDiv.innerHTML = "";
-      let data = JSON.parse(this.responseText);
-      postBuilder(mainDiv, 12, data);
-    })
+    makeReq("ImaginaryLandscapes");
   })
   menuDiv.appendChild(getAppButton);
 
@@ -78,24 +45,29 @@ let mainDiv = document.createElement("div");
 mainDiv.className = "mainDiv";
 body.appendChild(mainDiv);
 
-let headerDiv = document.createElement("div");
-headerDiv.id = "headerDiv";
-mainDiv.appendChild(headerDiv);
+  let headerDiv = document.createElement("div");
+  headerDiv.id = "headerDiv";
+  mainDiv.appendChild(headerDiv);
 
+makeReq("outrun");
 
+function makeReq(subreddit){
+  let url = `https://www.reddit.com/r/${subreddit}.json`
+  let newReq = new XMLHttpRequest();
+  newReq.open("GET", url);
+  newReq.send();
+  newReq.addEventListener("load", callBack);
+}
 
-let redditReq = new XMLHttpRequest();
-redditReq.addEventListener("load", function(){
+function callBack(){
+  mainDiv.innerHTML = "";
   let data = JSON.parse(this.responseText);
   postBuilder(mainDiv, 12, data);
-});
-redditReq.open("GET", "https://www.reddit.com/r/outrun.json");
-redditReq.send();
+}
 
 function postBuilder(parentElem, amount, data){
   console.log(data.data.children[0].data);
   let postData = data.data.children;
-
 
   for(let i = 0; i < amount; i++){
     let postDiv = document.createElement("div");
@@ -129,6 +101,5 @@ function postBuilder(parentElem, amount, data){
 
     let brElem = document.createElement("br");
     postDiv.appendChild(brElem);
-
   }
 }
