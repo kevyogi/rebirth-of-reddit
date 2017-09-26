@@ -66,13 +66,7 @@ function callBack(){
 }
 
 function postBuilder(parentElem, amount, data){
-  // console.log(data.data.children[0].data);
-  // console.log(data.data.children[6].data);
   let postData = data.data.children;
-  // console.log(postData[6].data.preview.images[0].source.url);
-  console.log(postData[3].data);
-  console.log(postData[5].data);
-  console.log(postData[6].data);
 
   for(let i = 0; i < amount; i++){
     let postDiv = document.createElement("div");
@@ -92,7 +86,11 @@ function postBuilder(parentElem, amount, data){
 
     let titleDiv = document.createElement("div");
     titleDiv.className = "titleDiv";
-    titleDiv.innerHTML = (postData[i].data.title).substr(0, 50) + "...";
+    if((postData[i].data.title).length > 50){
+      titleDiv.innerHTML = (postData[i].data.title).substr(0, 50) + "...";
+    }else{
+      titleDiv.innerHTML = postData[i].data.title;
+    }
     postDiv.appendChild(titleDiv);
 
     let submitterDiv = document.createElement("div");
