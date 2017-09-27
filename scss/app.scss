@@ -170,6 +170,9 @@ body {
   #appTitle {
     background: white url("/assets/logo.svg") no-repeat left;
   }
+  #footer {
+    display: none;
+  }
   @include block_display(block);
 
 }
@@ -183,6 +186,9 @@ body {
     background-color: white;
     background-repeat: no-repeat;
     background-position: center;
+  }
+  #footer {
+    display: block;
   }
   @include block_display(inline-block);
 }
