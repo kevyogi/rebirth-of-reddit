@@ -7,50 +7,33 @@ let footer = document.getElementById("footer");
 let plusDiv = document.createElement("div");
 plusDiv.id = "plusDiv";
 header.appendChild(plusDiv);
-  let thePlus = document.createElement("div");
-  thePlus.id = "thePlus";
-  thePlus.innerHTML = "+";
-  plusDiv.appendChild(thePlus);
 
-let appTitle = document.createElement("h1");
-appTitle.id = "appTitle";
-header.appendChild(appTitle);
+  let thePlus = createIdElement("div", "thePlus", plusDiv, "+");
+
+let appTitle = createIdElement("h1", "appTitle", header, "");
 
 let menuDiv = document.createElement("div");
 menuDiv.id = "menuDiv";
 header.appendChild(menuDiv);
 
-  let randomButton = document.createElement("button");
-  randomButton.id = "randomButton";
-  randomButton.innerHTML = "RANDOM";
+  let randomButton = createIdElement("button", "randomButton", menuDiv, "RANDOM");
   randomButton.addEventListener("click", function(){
     makeReq("glitch_art");
   })
-  menuDiv.appendChild(randomButton);
 
-  let boardsButton = document.createElement("button");
-  boardsButton.id = "boardsButton";
-  boardsButton.innerHTML = "MY BOARDS";
+  let boardsButton = createIdElement("button", "boardsButton", menuDiv, "MY BOARDS");
   boardsButton.addEventListener("click", function(){
     makeReq("VaporwaveAesthetics");
   })
-  menuDiv.appendChild(boardsButton);
 
-  let getAppButton = document.createElement("button");
-  getAppButton.id = "getAppButton";
-  getAppButton.innerHTML = "GET THE APP";
+  let getAppButton = createIdElement("button", "getAppButton", menuDiv, "GET THE APP");
   getAppButton.addEventListener("click", function(){
     makeReq("ImaginaryLandscapes");
   })
-  menuDiv.appendChild(getAppButton);
 
-let mainDiv = document.createElement("div");
-mainDiv.className = "mainDiv";
-body.appendChild(mainDiv);
+let mainDiv = createClassedElement("div", "mainDiv", body);
 
-  let headerDiv = document.createElement("div");
-  headerDiv.id = "headerDiv";
-  mainDiv.appendChild(headerDiv);
+  let headerDiv = createIdElement("div", "headerDiv", mainDiv, "");
 
 makeReq("outrun");
 
@@ -70,17 +53,12 @@ function callBack(){
 
 function postBuilder(parentElem, amount, data){
   let postData = data.data.children;
-  let holderDiv = document.createElement("div");
-  holderDiv.id = "holderDiv";
-  parentElem.appendChild(holderDiv);
 
   for(let i = 0; i < amount; i++){
-    let postDiv = document.createElement("div");
-    postDiv.className = "postDiv";
-    holderDiv.appendChild(postDiv);
 
-    let pictureElem = document.createElement("div");
-    pictureElem.className = "pictureElem";
+    let postDiv = createClassedElement("div", "postDiv", parentElem);
+
+    let pictureElem = createClassedElement("div", "pictureElem", postDiv);
     if(postData[i].data.hasOwnProperty("preview") && postData[i].data.preview.images[0].variants.hasOwnProperty("gif")){
       pictureElem.style.backgroundImage = `url('${postData[i].data.preview.images[0].variants.gif.source.url}')`;
     }else if(postData[i].data.hasOwnProperty("preview")){
@@ -88,44 +66,44 @@ function postBuilder(parentElem, amount, data){
     }else{
       pictureElem.style.backgroundImage = `url('${postData[i].data.url}')`;
     }
-    postDiv.appendChild(pictureElem);
 
-    let brElem1 = document.createElement("br");
-    postDiv.appendChild(brElem1);
+    let brElem1 = createClassedElement("br", "brElem", postDiv);
 
-    let titleDiv = document.createElement("div");
-    titleDiv.className = "titleDiv";
+    let titleDiv = createClassedElement("div", "titleDiv", postDiv);
     if((postData[i].data.title).length > 50){
       titleDiv.innerHTML = (postData[i].data.title).substr(0, 50) + "...";
     }else{
       titleDiv.innerHTML = postData[i].data.title;
     }
-    postDiv.appendChild(titleDiv);
 
-    let submitterDiv = document.createElement("div");
-    submitterDiv.className = "submitterDiv";
+    let submitterDiv = createClassedElement("div", "submitterDiv", postDiv);
     submitterDiv.innerHTML = "by " + postData[i].data.author + " on " + (new Date(postData[i].data.created * 1000)).toLocaleString();
-    postDiv.appendChild(submitterDiv);
 
-    let scoreDiv = document.createElement("div");
-    scoreDiv.className = "scoreDiv";
+    let scoreDiv = createClassedElement("div", "scoreDiv", postDiv);
     scoreDiv.innerHTML = postData[i].data.score + " upvotes";
-    postDiv.appendChild(scoreDiv);
 
-    let commentDiv = document.createElement("div");
-    commentDiv.className = "commentDiv";
+    let commentDiv = createClassedElement("div", "commentDiv", postDiv);
     commentDiv.innerHTML = "Comments: " + postData[i].data.num_comments;
-    postDiv.appendChild(commentDiv);
 
-    let brElem2 = document.createElement("br");
-    postDiv.appendChild(brElem2);
+    let brElem2 = createClassedElement("br", "brElem", postDiv);
   }
 }
 
-let facebook = document.createElement("div");
-facebook.id = "facebook";
-footer.appendChild(facebook);
+let facebook = createIdElement("div", "facebook", footer, "");
 
-let instagram = document.createElement("div");
-instagram.id = "instagram";
-footer.appendChild(instagram);
+let instagram = createIdElement("div", "instagram", footer, "");
+
+function createClassedElement(element, className, parent){
+  let newElement = document.createElement(element);
+  newElement.className = className;
+  parent.appendChild(newElement);
+  return newElement;
+}
+
+function createIdElement(element, id, parent, innerHTML){
+  let newElement = document.createElement(element);
+  newElement.id = id;
+  newElement.innerHTML = innerHTML;
+  parent.appendChild(newElement);
+  return newElement;
+}
