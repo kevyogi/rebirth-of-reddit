@@ -4,9 +4,7 @@ let header = document.getElementById("header");
 let body = document.getElementById("body");
 let footer = document.getElementById("footer");
 
-let plusDiv = document.createElement("div");
-plusDiv.id = "plusDiv";
-header.appendChild(plusDiv);
+let plusDiv = createIdElement("div", "plusDiv", header, "");
 
   let thePlus = createIdElement("div", "thePlus", plusDiv, "+");
 
@@ -48,7 +46,7 @@ function makeReq(subreddit){
 function callBack(){
   mainDiv.innerHTML = "";
   let data = JSON.parse(this.responseText);
-  postBuilder(mainDiv, 12, data);
+  postBuilder(mainDiv, 24, data);
 }
 
 function postBuilder(parentElem, amount, data){
@@ -57,6 +55,9 @@ function postBuilder(parentElem, amount, data){
   for(let i = 0; i < amount; i++){
 
     let postDiv = createClassedElement("div", "postDiv", parentElem);
+    postDiv.addEventListener("click", function(){
+      return open(postData[i].data.url);
+    })
 
     let pictureElem = createClassedElement("div", "pictureElem", postDiv);
     if(postData[i].data.hasOwnProperty("preview") && postData[i].data.preview.images[0].variants.hasOwnProperty("gif")){
@@ -64,7 +65,7 @@ function postBuilder(parentElem, amount, data){
     }else if(postData[i].data.hasOwnProperty("preview")){
       pictureElem.style.backgroundImage = `url('${postData[i].data.preview.images[0].source.url}')`;
     }else{
-      pictureElem.style.backgroundImage = `url('${postData[i].data.url}')`;
+      pictureElem.style.backgroundImage = "url('http://38.media.tumblr.com/cf96e1c1de3ae581a85853ff1373a195/tumblr_njj641ucsB1txeruoo2_r2_500.gif')"
     }
 
     let brElem1 = createClassedElement("br", "brElem", postDiv);
@@ -77,7 +78,7 @@ function postBuilder(parentElem, amount, data){
     }
 
     let submitterDiv = createClassedElement("div", "submitterDiv", postDiv);
-    submitterDiv.innerHTML = "by " + postData[i].data.author + " on " + (new Date(postData[i].data.created * 1000)).toLocaleString();
+    submitterDiv.innerHTML = "by " + postData[i].data.author + " " + moment((postData[i].data.created * 1000)).fromNow();
 
     let scoreDiv = createClassedElement("div", "scoreDiv", postDiv);
     scoreDiv.innerHTML = postData[i].data.score + " upvotes";

@@ -10,8 +10,10 @@ body {
 }
 
 #appTitle {
-  background: white url("/assets/logo.svg") no-repeat center;
-  // background-image: url("/assets/header_bg.svg");
+  background: url("/assets/logo.svg"),  url("/assets/header_bg.svg");
+  background-color: white;
+  background-repeat: no-repeat;
+  background-position: center;
   height: 60px;
   margin: 0px;
 }
@@ -90,7 +92,7 @@ body {
   // margin: auto;
   padding: 20px;
   width: 400px;
-  height: 450px;
+  height: 425px;
   display: inline-block;
   border: 10px solid transparent;
 }
@@ -165,6 +167,9 @@ body {
   .mainDiv {
     max-width: 520px;
   }
+  #appTitle {
+    background: white url("/assets/logo.svg") no-repeat left;
+  }
   @include block_display(block);
 
 }
@@ -172,6 +177,12 @@ body {
 @media (min-width: 1200px){
   .mainDiv {
     max-width: 1040px;
+  }
+  #appTitle {
+    background: url("/assets/logo.svg"),  url("/assets/header_bg.svg");
+    background-color: white;
+    background-repeat: no-repeat;
+    background-position: center;
   }
   @include block_display(inline-block);
 }
