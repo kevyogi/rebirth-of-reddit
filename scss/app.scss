@@ -4,6 +4,8 @@
 
 body {
   margin: 0;
+  font-family: 'Oswald', sans-serif;
+  // font-family: 'Lato', sans-serif;
 }
 
 #appTitle {
@@ -12,11 +14,32 @@ body {
   height: 40px;
 }
 
+#plusDiv {
+  float: right;
+  color: #B74326;
+  border: 2px solid #F1592A;
+  height: 32px;
+  width: 32px;
+  margin-right: 20px;
+}
+
+#thePlus {
+  text-align: center;
+  font-size: 40px;
+  margin-top: -15px;
+}
+
+#plusDiv:hover {
+  color: white;
+  background-color: #F1592A;
+}
+
 .mainDiv {
   background-image: url("/assets/bg.jpg");
-  background-size: cover;
   padding-bottom: 1px;
   padding-top: 1px;
+  margin: auto;
+  width: 100%;
 }
 
 #menuDiv {
@@ -30,6 +53,7 @@ body {
   border: none;
   color: #818285;
   font-size: 20px;
+  margin-top: 10px;
 }
 
 #randomButton:hover {
@@ -63,8 +87,8 @@ body {
   margin: 30px;
   // margin: auto;
   padding: 20px;
-  max-width: 400px;
-  max-height: 500px;
+  width: 400px;
+  height: 450px;
   display: inline-block;
   border: 10px solid transparent;
 }
@@ -85,6 +109,7 @@ body {
 .titleDiv {
   width: 400px;
   margin: auto;
+  font-size: 20px;
 }
 
 .submitterDiv {
@@ -105,14 +130,43 @@ body {
   color: #8F9194;
 }
 
+#footer {
+  background-color: #3A3A3C;
+  text-align: center;
+  height: 50px;
+}
+
+#instagram {
+  background: #3A3A3C url("/assets/instagram_grey.svg") no-repeat center;
+  height: 30px;
+  width: 30px;
+  display: inline-block;
+  margin-top: 10px;
+}
+
+#instagram:hover {
+  background: #3A3A3C url("/assets/instagram_orange.svg") no-repeat center;
+}
+
+#facebook {
+  background: #3A3A3C url("/assets/facebook_grey.svg") no-repeat center;
+  height: 30px;
+  width: 30px;
+  display: inline-block;
+}
+
+#facebook:hover {
+  background: #3A3A3C url("/assets/facebook_orange.svg") no-repeat center;
+}
+
 @media screen and (min-width: 0px){
   @include block_display(block);
 }
 
-@media screen and (min-width: 400px){
+@media screen and (min-width: 300px){
   @include block_display(inline-block);
 }
 
-@media screen and (min-width: 800px){
+@media screen and (min-width: 1250px){
   @include block_display(inline-block);
 }

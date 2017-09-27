@@ -4,14 +4,17 @@ let header = document.getElementById("header");
 let body = document.getElementById("body");
 let footer = document.getElementById("footer");
 
+let plusDiv = document.createElement("div");
+plusDiv.id = "plusDiv";
+header.appendChild(plusDiv);
+  let thePlus = document.createElement("div");
+  thePlus.id = "thePlus";
+  thePlus.innerHTML = "+";
+  plusDiv.appendChild(thePlus);
+
 let appTitle = document.createElement("h1");
 appTitle.id = "appTitle";
 header.appendChild(appTitle);
-
-let plusDiv = document.createElement("div");
-plusDiv.id = "plusDiv";
-plusDiv.innerHTML = "+";
-header.appendChild(plusDiv);
 
 let menuDiv = document.createElement("div");
 menuDiv.id = "menuDiv";
@@ -67,11 +70,14 @@ function callBack(){
 
 function postBuilder(parentElem, amount, data){
   let postData = data.data.children;
+  let holderDiv = document.createElement("div");
+  holderDiv.id = "holderDiv";
+  parentElem.appendChild(holderDiv);
 
   for(let i = 0; i < amount; i++){
     let postDiv = document.createElement("div");
     postDiv.className = "postDiv";
-    parentElem.appendChild(postDiv);
+    holderDiv.appendChild(postDiv);
 
     let pictureElem = document.createElement("div");
     pictureElem.className = "pictureElem";
@@ -83,6 +89,9 @@ function postBuilder(parentElem, amount, data){
       pictureElem.style.backgroundImage = `url('${postData[i].data.url}')`;
     }
     postDiv.appendChild(pictureElem);
+
+    let brElem1 = document.createElement("br");
+    postDiv.appendChild(brElem1);
 
     let titleDiv = document.createElement("div");
     titleDiv.className = "titleDiv";
@@ -108,7 +117,15 @@ function postBuilder(parentElem, amount, data){
     commentDiv.innerHTML = "Comments: " + postData[i].data.num_comments;
     postDiv.appendChild(commentDiv);
 
-    let brElem = document.createElement("br");
-    postDiv.appendChild(brElem);
+    let brElem2 = document.createElement("br");
+    postDiv.appendChild(brElem2);
   }
 }
+
+let facebook = document.createElement("div");
+facebook.id = "facebook";
+footer.appendChild(facebook);
+
+let instagram = document.createElement("div");
+instagram.id = "instagram";
+footer.appendChild(instagram);
