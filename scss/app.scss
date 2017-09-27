@@ -5,13 +5,15 @@
 body {
   margin: 0;
   font-family: 'Oswald', sans-serif;
+  background-image: url("/assets/bg.jpg")
   // font-family: 'Lato', sans-serif;
 }
 
 #appTitle {
   background: white url("/assets/logo.svg") no-repeat center;
   // background-image: url("/assets/header_bg.svg");
-  height: 40px;
+  height: 60px;
+  margin: 0px;
 }
 
 #plusDiv {
@@ -21,6 +23,7 @@ body {
   height: 32px;
   width: 32px;
   margin-right: 20px;
+  margin-top: 12px;
 }
 
 #thePlus {
@@ -35,11 +38,10 @@ body {
 }
 
 .mainDiv {
-  background-image: url("/assets/bg.jpg");
   padding-bottom: 1px;
   padding-top: 1px;
   margin: auto;
-  width: 100%;
+  max-width: 1560px;
 }
 
 #menuDiv {
@@ -159,14 +161,28 @@ body {
   background: #3A3A3C url("/assets/facebook_orange.svg") no-repeat center;
 }
 
-@media screen and (min-width: 0px){
+@media (min-width: 1px){
+  .mainDiv {
+    max-width: 520px;
+  }
   @include block_display(block);
+
 }
 
-@media screen and (min-width: 300px){
+@media (min-width: 1400px){
+  .mainDiv {
+    max-width: 1040px;
+  }
   @include block_display(inline-block);
 }
 
-@media screen and (min-width: 1250px){
+@media (min-width: 1600px){
+  .mainDiv {
+    max-width: 1560px;
+  }
   @include block_display(inline-block);
 }
+
+
+//1040
+//520
